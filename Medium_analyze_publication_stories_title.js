@@ -106,7 +106,7 @@ function jkhasdScrollPage() {
 		resultsTableHeaderRow.appendChild(createTd("Recs"));
 		
 
-		var mediumPublicationName = document.getElementsByClassName('stats-title--page')[0].innerHTML;
+		var mediumPublicationName = document.getElementsByClassName('stats-title--publication')[0].innerHTML;
 		var resultsTableTitleRow = document.createElement('tr');
 		resultsTableTitleRow.style.cssText = "background:#2c3e50";
 		resultsTableTitleRow.appendChild(createSTd(mediumPublicationName, 8));
