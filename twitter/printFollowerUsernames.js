@@ -26,11 +26,20 @@ function hsdhdjhRun() {
             var all = userName.trim() + " " + screenName.trim() + " " + userBio.trim()
             all = all.toLowerCase()
             var isMatch = all.contains("marketing") 
-                || all.contains("growth")
-                || all.contains("digital")
+                || all.contains("growth marketing")
+                || all.contains("digital marketing")
+                || all.contains("digital advertising")
+                || all.contains("sales analytics")
+                || all.contains("business analytics")
+                || all.contains("biz analytics")
                 || all.contains("growth hacking") 
-                || all.contains("content")
+                || all.contains("growthhacking") 
+                || all.contains("growthmarketing") 
+                || all.contains("content marketing")
+                || all.contains("contentmarketing")
+                || all.contains("social media")
                 || all.contains("business")
+                || all.contains("biz")
                 || all.contains("saas")
                 || all.contains("b2b")
                 || all.contains("sales")
@@ -46,9 +55,9 @@ function hsdhdjhRun() {
 
         ++attempts
         if(addedThisTime > 0) {
-            totalAdded += addedThisTime
-            console.error(attempts + " | tf:" + totalAdded);
-            console.error(addedScreenNames)
+            totalAdded = addedScreenNames.split("@").length
+            console.error(attempts + " | total added: " + totalAdded);
+            console.error("\n" +addedScreenNames)
         } else {
             console.debug(addedScreenNames)
             console.log("Added " + totalAdded);
