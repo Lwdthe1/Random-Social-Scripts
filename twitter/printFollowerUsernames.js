@@ -25,7 +25,8 @@ function hsdhdjhRun() {
             userBio = bioEl && bioEl.innerHTML || ""
             var all = userName.trim() + " " + screenName.trim() + " " + userBio.trim()
             all = all.toLowerCase()
-            var isMatch = all.contains("marketing") 
+            var isMatch = all.contains("entrepreneur") 
+                all.contains("marketing") 
                 || all.contains("growth marketing")
                 || all.contains("digital marketing")
                 || all.contains("digital advertising")
