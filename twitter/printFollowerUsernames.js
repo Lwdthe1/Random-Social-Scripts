@@ -41,6 +41,7 @@ function hsdhdjhRun() {
                 || all.contains("content marketing")
                 || all.contains("contentmarketing")
                 || all.contains("social media")
+                || all.contains("socialmedia")
                 || all.contains("business")
                 || all.contains("biz")
                 || all.contains("saas")
