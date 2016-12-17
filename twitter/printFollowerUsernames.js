@@ -62,15 +62,6 @@ function hsdhdjhRun() {
             totalAdded = addedScreenNames.split("@").length
             console.error(attempts + " | total added: " + totalAdded);
             console.error("\n" +addedScreenNames)
-        } else {
-            console.debug(addedScreenNames)
-            console.log("Added " + totalAdded);
-            console.log("Restarting in an hour ...");
-            attampts = 0;
-            totalAdded = 0;
-            setTimeout(function(){
-                runAgain()
-            }, 30 * 60 * 1000);
         }
         setTimeout(function(){ runAgain() }, restSecs * 1000); // scrolls every 1000 milliseconds
     }
