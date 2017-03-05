@@ -11,14 +11,12 @@ function jkhasdScrollPage() {
 	for(var i = 0; i < twitterFollowButtons.length; i++) {
 		var followButton = twitterFollowButtons[i];
 		var likeSpan = followButton.innerHTML
-		if(likeSpan != "Like") { continue; }
-        if(followButton.disabled == false) {
+
             followButton.parentElement.click();
-            followSpan[0].innerHTML = "FOLLOWED";
             followButton.disabled = true;
             ++jfjkfhdTotalFollowed;
             ++followedThisTime;
-        }
+
 	}
 	
 	if(followedThisTime > 0) console.log(++jfjkfhdFollowAttemps + " | tf:" + jfjkfhdTotalFollowed);
