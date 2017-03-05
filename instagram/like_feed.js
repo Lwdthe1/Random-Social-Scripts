@@ -6,14 +6,14 @@ function jkhasdScrollPage() {
 
 	window.scrollBy(0,50); // horizontal and vertical scroll increments
 	
-	var twitterFollowButtons = document.getElementsByClassName('_ebwb5 _1tv0k');
+	var twitterFollowButtons = document.getElementsByClassName('_soakw coreSpriteHeartOpen');
 	//alert(twitterFollowButtons.length);
 	for(var i = 0; i < twitterFollowButtons.length; i++) {
 		var followButton = twitterFollowButtons[i];
-		var followSpan = followButton.innerHTML
-		if(followSpan != "Follow") { continue; }
+		var likeSpan = followButton.innerHTML
+		if(likeSpan != "Like") { continue; }
         if(followButton.disabled == false) {
-            followButton.click();
+            followButton.parentElement.click();
             followSpan[0].innerHTML = "FOLLOWED";
             followButton.disabled = true;
             ++jfjkfhdTotalFollowed;
