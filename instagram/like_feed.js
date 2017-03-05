@@ -4,7 +4,7 @@ var restSecs = 10;
 function jkhasdScrollPage() {
 	var followedThisTime = 0;
 
-	window.scrollBy(0,50); // horizontal and vertical scroll increments
+	window.scrollBy(0,500); // horizontal and vertical scroll increments
 	
 	var twitterFollowButtons = document.getElementsByClassName('_soakw coreSpriteHeartOpen');
 	//alert(twitterFollowButtons.length);
