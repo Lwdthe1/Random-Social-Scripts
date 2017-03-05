@@ -1,6 +1,6 @@
 var jfjkfhdFollowAttemps = 0;
 var jfjkfhdTotalFollowed = 0;
-var restSecs = 2;
+var restSecs = 10;
 function jkhasdScrollPage() {
 	var followedThisTime = 0;
 
