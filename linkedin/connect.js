@@ -9,7 +9,7 @@ function jkhasdScrollPage() {
 	window.scrollTo(0,document.body.scrollHeight); // horizontal and vertical scroll increments
 	
 	
-	var linkedInConnectButtons = document.getElementsByClassName('bt-request-buffed buffed-blue-bkg-1');
+	var linkedInConnectButtons = document.getElementsByClassName('button-secondary-small');
 	for(var i = 0; i < linkedInConnectButtons.length; i++) {
 		var connectButton = linkedInConnectButtons[i];
 		var connectButtonInnerHTML = connectButton.innerHTML;
