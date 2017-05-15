@@ -7,13 +7,13 @@ function jkhasdScrollPage() {
 
 	window.scrollBy(0,50); // horizontal and vertical scroll increments
 	
-	var linkedinLikeButtons = document.getElementsByClassName('like');
+	var linkedinLikeButtons = document.getElementsByClassName('like-button button like feed-s-social-action-bar__action-btn social-action-btn mr5 ember-view');
 	//alert(linkedinLikeButtons.length);
 	for(var i = 0; i < linkedinLikeButtons.length; i++) {
 		var likeButton = linkedinLikeButtons[i];
-		var canLike = likeButton.getAttribute("data-liked") == "";
+		var canLike = true
 
-		if(canLike == true) {
+		if(canLike) {
 			if(likeButton.disabled == false) {
 	   			//console.log(i + 'y| ' + likeButtonInnerHTML);
     			likeButton.click();
