@@ -17,6 +17,8 @@ function jkhasdScrollPage() {
 			if(likeButton.disabled == false) {
 	   			//console.log(i + 'y| ' + likeButtonInnerHTML);
     			likeButton.click();
+			likeButton.innerText = "LIKED"
+			likeButton.style.color = "#1abc9c"
     			likeButton.disabled = true;
     			++jfjkfhdTotalLiked;
     			++likedThisTime;
