@@ -6,11 +6,11 @@ function jkhasdScrollPage() {
 
 	window.scrollBy(0,50); // horizontal and vertical scroll increments
 	
-	var twitterFollowButtons = document.getElementsByClassName('user-actions-follow-button js-follow-btn follow-button btn small small-follow-btn');
+	var twitterFollowButtons = document.getElementsByClassName('EdgeButton follow-text');
 	//alert(twitterFollowButtons.length);
 	for(var i = 0; i < twitterFollowButtons.length; i++) {
 		var followButton = twitterFollowButtons[i];
-		var followSpan = followButton.getElementsByClassName("follow-text");
+		var followSpan = followButton.getElementsByTagName("span");
 		if(followSpan === undefined || followSpan === null) { continue; }
 		
 		var followSpanInnerHTML = followSpan[0].innerHTML;
