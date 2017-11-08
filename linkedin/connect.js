@@ -1,6 +1,6 @@
 var jfjkfhdConnectAttemps = 0;
 var jfjkfhdTotalConnected = 0;
-var restSecs = 5;
+var restSecs = 30;
 function jkhasdScrollPage() {
 	var connectedThisTime = 0;
 	
@@ -25,7 +25,7 @@ function jkhasdScrollPage() {
 	}
 	
 	if(connectedThisTime > 0) console.log(++jfjkfhdConnectAttemps + " | tf:" + jfjkfhdTotalConnected);
-	if(jfjkfhdConnectAttemps <= 80) scrolldelay = setTimeout('jkhasdScrollPage()', restSecs * 1000); // scrolls every 100 milliseconds
+	if(jfjkfhdConnectAttemps <= 80) scrolldelay = setTimeout(jkhasdScrollPage, restSecs * 1000); // scrolls every 100 milliseconds
 	else {
 		console.log("Connected " + jfjkfhdTotalConnected);
 		console.log("Restarting in an hour ...");
