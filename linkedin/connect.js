@@ -1,6 +1,6 @@
 var jfjkfhdConnectAttemps = 0;
 var jfjkfhdTotalConnected = 0;
-var restSecs = 30;
+var restSecs = 60;
 function jkhasdScrollPage() {
 	var connectedThisTime = 0;
 	
