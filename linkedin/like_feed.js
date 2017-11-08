@@ -1,13 +1,13 @@
 var jfjkfhdLikeAttemps = 0;
 var jfjkfhdTotalLiked = 0;
-var restSecs = 10;
+var restSecs = 45;
 var usersListOpened = false;
 function jkhasdScrollPage() {
 	var likedThisTime = 0;
 
 	window.scrollBy(0,50); // horizontal and vertical scroll increments
 	
-	var linkedinLikeButtons = document.getElementsByClassName('like-button button like feed-s-social-action-bar__action-btn social-action-btn mr5 ember-view');
+	var linkedinLikeButtons = document.getElementsByClassName('like-button button like feed-base-social-action-bar__action-btn social-action-btn mr5 ember-view');
 	//alert(linkedinLikeButtons.length);
 	for(var i = 0; i < linkedinLikeButtons.length; i++) {
 		var likeButton = linkedinLikeButtons[i];
@@ -28,7 +28,7 @@ function jkhasdScrollPage() {
 	
 	if(likedThisTime > 0) console.log(++jfjkfhdLikeAttemps + " | tf:" + jfjkfhdTotalLiked);
 
-	if(jfjkfhdLikeAttemps <= 80) scrolldelay = setTimeout('jkhasdScrollPage()', restSecs * 1000); // scrolls every 100 milliseconds
+	if(jfjkfhdLikeAttemps <= 80) scrolldelay = setTimeout(jkhasdScrollPage, restSecs * 1000); // scrolls every 100 milliseconds
 	else {
 		console.log("Liked " + jfjkfhdTotalLiked);
 		console.log("Restarting in an hour ...");
