@@ -44,4 +44,4 @@ var followButton = twitterFollowButtons[i];
 	}
 }
 //call the method
-jkhasdScrollPage();
+jkhasdScrollPage(2);
