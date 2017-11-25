@@ -1,15 +1,16 @@
 var jfjkfhdFollowAttemps = 0;
 var jfjkfhdTotalFollowed = 0;
 var restSecs = 60;
-function jkhasdScrollPage() {
+function jkhasdScrollPage(limitPerRound) {
 	var followedThisTime = 0;
+	limitPerRound = limitPerRound || 2
 
 	window.scrollBy(0,5000); // horizontal and vertical scroll increments
 	
 	var twitterFollowButtons = document.getElementsByClassName('EdgeButton follow-text');
 	//alert(twitterFollowButtons.length);
 	for(var i = 0; i < twitterFollowButtons.length; i++) {
-if(followedThisTime >= 5) break;		
+if(followedThisTime >= limitPerRound) break;		
 var followButton = twitterFollowButtons[i];
 		var followSpan = followButton.getElementsByTagName("span");
 		if(followSpan === undefined || followSpan === null) { continue; }
