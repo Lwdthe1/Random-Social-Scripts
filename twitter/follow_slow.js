@@ -40,8 +40,9 @@ var followButton = twitterFollowButtons[i];
 		console.log("Restarting in an hour ...");
 		jfjkfhdFollowAttemps = 0;
 		jfjkfhdTotalFollowed = 0;
-		setTimeout(jkhasdScrollPage, 30 * 60 * 1000);
+		setTimeout(jkhasdScrollPage, 45 * 60 * 1000);
 	}
 }
+
 //call the method
 jkhasdScrollPage(1);
