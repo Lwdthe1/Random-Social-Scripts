@@ -25,7 +25,7 @@ let fhgafghFollowNScroll
 			console.log('Restarting in an hour ...')
 			followAttempts = 0
 			totalFollowed = 0
-			setTimeout(followAndScroll, 45 * 60 * 1000)
+			setTimeout(followAndScroll.bind(window), 45 * 60 * 1000)
 		}
 	}
 
