@@ -3,7 +3,7 @@ let fhgafghFollowNScroll
 (function() {
 	let followAttempts = 0
 	let totalFollowed = 0
-    let restSecs = 1
+    let restSecs = 60
     let jQ = $
     let _limitPerRound
 	function followAndScroll(limitPerRound) {
