@@ -1,17 +1,20 @@
+
 let fhgafghFollowNScroll
 (function() {
 	let followAttempts = 0
 	let totalFollowed = 0
-	let restSecs = 60
+    let restSecs = 1
+    let jQ = $
+    let _limitPerRound
 	function followAndScroll(limitPerRound) {
-		limitPerRound = limitPerRound || 2
+		limitPerRound = limitPerRound || _limitPerRound || 2
 
 		window.scrollBy(0, 5000) // horizontal and vertical scroll increments
 
 		let followedThisTime = 0
 		let i = 0
 		while (i++ < limitPerRound) {
-			const jFollowButton = $('[data-testid*="-follow"]')
+			const jFollowButton = jQ('[data-testid*="-follow"]')
 			jFollowButton.click()
 		}
 
@@ -25,7 +28,7 @@ let fhgafghFollowNScroll
 			console.log('Restarting in an hour ...')
 			followAttempts = 0
 			totalFollowed = 0
-			setTimeout(followAndScroll.bind(window), 45 * 60 * 1000)
+			setTimeout(followAndScroll, 45 * 60 * 1000)
 		}
 	}
 
