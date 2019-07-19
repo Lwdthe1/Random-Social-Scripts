@@ -1,3 +1,4 @@
+let fhgafghFollowNScroll
 (function() {
 	let followAttempts = 0
 	let totalFollowed = 0
@@ -29,5 +30,6 @@
 	}
 
 	//call the method
+	kjdfsfgkjafghkfhgakhfghFollowNScroll = followAndScroll
 	followAndScroll(1)
 })()
