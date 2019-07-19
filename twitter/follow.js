@@ -30,6 +30,6 @@ let fhgafghFollowNScroll
 	}
 
 	//call the method
-	kjdfsfgkjafghkfhgakhfghFollowNScroll = followAndScroll
+	fhgafghFollowNScroll = followAndScroll
 	followAndScroll(1)
 })()
