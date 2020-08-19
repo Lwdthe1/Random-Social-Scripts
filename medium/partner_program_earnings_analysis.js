@@ -22,7 +22,6 @@ function runEarningsAnalysis() {
     group.numPrices = 0
     
     group.addPrice = (price) => {
-          console.log('----here2', price, group)
       group.prices.push(price)
       group.numPrices = group.prices.length
     }
@@ -34,7 +33,6 @@ function runEarningsAnalysis() {
   })
   
   stories.forEach(({price}) => {
-    console.log('----here1', price)
     if (price === 0.01) groupMap.e001.addPrice(price)
     if (price >= 0.02 && price <= 0.5) groupMap.e002To050.addPrice(price)
     if (price >= 0.51 && price <= 1) groupMap.e051To100.addPrice(price) 
