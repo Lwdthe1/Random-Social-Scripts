@@ -3,31 +3,32 @@ function runEarningsAnalysis() {
       return {price: parseFloat(node.innerText.replace('$', ''))}
   })
   
-  const addPriceToGroup = (group, price) => {
-    if (!group.prices) {
-      group.prices = []
-      group.numPrices = 0
-    }
-    
+  const addPriceToGroup = (group, price) => {    
     group.prices.push(price)
     group.numPrices++
   }
-
-  const data = stories.reduce((map, {price}) => {
-    if (price === 0.01) addPriceToGroup(map.e001, price)
-    if (price >= 0.02 && price <= 0.5) addPriceToGroup(map.e002To050, price)
-    if (price >= 0.51 && price <= 1) addPriceToGroup(map.e051To100, price)
-    if (price >= 1.01 && price <= 5) addPriceToGroup(map.e101To500, price)
-    if (price >= 5.01 && price <= 10) addPriceToGroup(map.e501To1000, price)
-    if (price >= 10.01) addPriceToGroup(map.e1001Up, price)
-    
-    return map
-  }, {
+  
+  const groupMap = {
     // These keys must all 
     // start with "e", 
     // the two numbers should be separated by "T",
     // and the numbers should represent cents ($)
     e001: {}, e002To050: {}, e051To100: {}, e101To500: {}, e501To1000: {}, e1001Up: {}
+  }
+  
+  // Shape the groups
+  Object.values(groupMap).forEach((group) => {
+    group.prices = []
+    group.numPrices = 0
+  })
+  
+  stories.forEach(({price}) => {
+    if (price === 0.01) addPriceToGroup(groupMap.e001, price)
+    if (price >= 0.02 && price <= 0.5) addPriceToGroup(groupMap.e002To050, price)
+    if (price >= 0.51 && price <= 1) addPriceToGroup(groupMap.e051To100, price)
+    if (price >= 1.01 && price <= 5) addPriceToGroup(groupMap.e101To500, price)
+    if (price >= 5.01 && price <= 10) addPriceToGroup(groupMap.e501To1000, price)
+    if (price >= 10.01) addPriceToGroup(groupMap.e1001Up, price)
   })
   
   const getGroupKeyPriceRange = (group) => {
@@ -35,13 +36,17 @@ function runEarningsAnalysis() {
     return {min: sorted[0], max: sorted[sorted.length - 1]}
   }
   
-  Object.values(data).reduce((map, group) => {
+  Object.values(groupMap).forEach((group) => {
     const range = getGroupKeyPriceRange(group)
-    group.sentence = `${group.numPrices} of my stories earned between $${range.min} and $${range.max}.`
-    return map
-  }, {})
-      
-  return data
+    if (range.numPrices) {
+      const rangeDisplay = range.min !== range.max ? `between $${range.min} and $${range.max}` : `$${range.min}`
+      group.report = `${group.numPrices} of my stories earned ${rangeDisplay}.`
+    }
+  })
+  
+  const report = Object.values(groupMap).map(({report}) => report).join('\n')
+  console.log(`%c✨💸 Your earnings report: \n${report}`, "color:#1abc9c; font-size:50px; font-weight: 700")
+  return {groupMap, report}
 }
 
 console.log(runEarningsAnalysis())
