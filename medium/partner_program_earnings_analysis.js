@@ -54,7 +54,7 @@ function runEarningsAnalysis() {
   })
   
   const report = Object.values(groupMap).map(({report}) => report).join('\n\n')
-  console.log(`%c✨💸 Your earnings report: \n%c${report}`, "color:#1abc9c; font-size:50px; font-weight: 700", 'color:#333; font-size:14px; font-weight: 700')
+  console.log(`%c✨💸 My earnings report: \n%c${report}`, "color:#1abc9c; font-size:50px; font-weight: 700", 'color:#333; font-size:14px; font-weight: 700')
   return {groupMap, report}
 }
 
