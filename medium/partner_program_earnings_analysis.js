@@ -67,14 +67,12 @@ function runEarningsAnalysis() {
       data.maxPrice = max
     }
     
-    if (min) {
-      data.numPrices += group.numPrices
-    }
+    data.numPrices += group.numPrices
     
     return data
   }, {numPrices: 0, minPrice: 0, maxPrice: 0})
   
-  const report = `I had ${totalReportData.numPrices} that earned me between $${totalReportData.minPrice} and $${totalReportData.maxPrice}. 
+  const report = `I had ${totalReportData.numPrices} stories that earned me between $${totalReportData.minPrice} and $${totalReportData.maxPrice}. 
     ${Object.values(groupMap).map(({report}) => report).join('\n\n   ')}`
   
   console.log(
