@@ -20,32 +20,41 @@ function runEarningsAnalysis() {
   Object.values(groupMap).forEach((group) => {
     group.prices = []
     group.numPrices = 0
-  })
-  
-  stories.forEach(({price}) => {
-    if (price === 0.01) addPriceToGroup(groupMap.e001, price)
-    if (price >= 0.02 && price <= 0.5) addPriceToGroup(groupMap.e002To050, price)
-    if (price >= 0.51 && price <= 1) addPriceToGroup(groupMap.e051To100, price)
-    if (price >= 1.01 && price <= 5) addPriceToGroup(groupMap.e101To500, price)
-    if (price >= 5.01 && price <= 10) addPriceToGroup(groupMap.e501To1000, price)
-    if (price >= 10.01) addPriceToGroup(groupMap.e1001Up, price)
-  })
-  
-  const getGroupKeyPriceRange = (group) => {
-    const sorted = group.prices.sort()
-    return {min: sorted[0], max: sorted[sorted.length - 1]}
-  }
-  
-  Object.values(groupMap).forEach((group) => {
-    const range = getGroupKeyPriceRange(group)
-    if (range.numPrices) {
-      const rangeDisplay = range.min !== range.max ? `between $${range.min} and $${range.max}` : `$${range.min}`
-      group.report = `${group.numPrices} of my stories earned ${rangeDisplay}.`
+    
+    group.addPrice = (price) => {
+          console.log('----here2', price, group)
+      group.prices.push(price)
+      group.numPrices = group.prices.length
+    }
+    
+    group.getPriceRange = () => {
+      const sorted = group.prices.sort()
+      return {min: sorted[0], max: sorted[sorted.length - 1]}
     }
   })
   
-  const report = Object.values(groupMap).map(({report}) => report).join('\n')
-  console.log(`%c✨💸 Your earnings report: \n${report}`, "color:#1abc9c; font-size:50px; font-weight: 700")
+  stories.forEach(({price}) => {
+    console.log('----here1', price)
+    if (price === 0.01) groupMap.e001.addPrice(price)
+    if (price >= 0.02 && price <= 0.5) groupMap.e002To050.addPrice(price)
+    if (price >= 0.51 && price <= 1) groupMap.e051To100.addPrice(price) 
+    if (price >= 1.01 && price <= 5) groupMap.e101To500.addPrice(price) 
+    if (price >= 5.01 && price <= 10) groupMap.e501To1000.addPrice(price)
+    if (price >= 10.01) groupMap.e1001Up.addPrice(price)
+  })
+  
+  Object.values(groupMap).forEach((group) => {
+    if (!group.numPrices) {
+      return
+    }
+    
+    const range = group.getPriceRange()
+    const rangeDisplay = range.min !== range.max ? `between $${range.min} and $${range.max}` : `$${range.min}`
+    group.report = `${group.numPrices} of my stories earned ${rangeDisplay}.`
+  })
+  
+  const report = Object.values(groupMap).map(({report}) => report).join('\n\n')
+  console.log(`%c✨💸 Your earnings report: \n%c${report}`, "color:#1abc9c; font-size:50px; font-weight: 700", 'color:#333; font-size:14px; font-weight: 700')
   return {groupMap, report}
 }
 
