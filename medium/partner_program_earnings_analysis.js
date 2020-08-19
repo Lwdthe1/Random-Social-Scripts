@@ -3,6 +3,8 @@ function runEarningsAnalysis() {
       return {price: parseFloat(node.innerText.replace('$', ''))}
   })
   
+  const periodDisplay = document.querySelector('.js-selectPeriod').innerText
+  
   const addPriceToGroup = (group, price) => {    
     group.prices.push(price)
     group.numPrices++
@@ -51,8 +53,36 @@ function runEarningsAnalysis() {
     group.report = `${group.numPrices} of my stories earned ${rangeDisplay}.`
   })
   
-  const report = Object.values(groupMap).map(({report}) => report).join('\n\n   ')
-  console.log(`%c✨💸 My earnings report: \n%c${report}`, "color:#1abc9c; font-size:50px; font-weight: 700", 'color:#333; font-size:14px; font-weight: 700')
+  const totalReportData = Object.values(groupMap).reduce((data, group) => {
+    const {min, max} = group.getPriceRange()
+    if (min === undefined) {
+      return
+    }
+    
+    if (!data.minPrice || min < data.minPrice) {
+      data.minPrice = min
+    }
+    
+    if (!data.maxPrice || max > data.maxPrice) {
+      data.maxPrice = max
+    }
+    
+    if (min) {
+      data.numPrices += group.numPrices
+    }
+    
+    return data
+  }, {numPrices: 0, minPrice: 0, maxPrice: 0})
+  
+  const report = `I had ${totalReportData.numPrices} that earned me between $${totalReportData.minPrice} and $${totalReportData.maxPrice}. 
+    ${Object.values(groupMap).map(({report}) => report).join('\n\n   ')}`
+  
+  console.log(
+    `%c✨💸 My earnings report for ${periodDisplay}: \n%c${report}`, 
+    "color:#1abc9c; font-size:50px; font-weight: 700", 
+    'color:#333; font-size:14px; font-weight: 700'
+  )
+
   return {groupMap, report}
 }
 
