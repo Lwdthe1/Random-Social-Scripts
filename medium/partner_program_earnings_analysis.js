@@ -84,8 +84,12 @@ groups.forEach((group) => {
     return data
   }, {numPrices: 0, minPrice: 0, maxPrice: 0})
   
-  const report = `I had ${totalReportData.numPrices} stories that earned me between $${totalReportData.minPrice} and $${totalReportData.maxPrice}. 
+  const totalEarnings = stories.reduce((sum, {price}) => sum + price, 0).toFixed(2)
+  const report = `I had ${totalReportData.numPrices} stories that earned me between $${totalReportData.minPrice} and $${totalReportData.maxPrice}.
+    They totaled to $${totalEarnings}
     ${groups.map(({report}) => report).join('\n\n   ')}`
+  
+
   
   console.log(
     `%c✨💸 My earnings report for ${periodDisplay}: \n%c${report}`, 
@@ -93,7 +97,7 @@ groups.forEach((group) => {
     'color:#333; font-size:14px; font-weight: 700'
   )
 
-  return {groups, report, stories}
+  return {groups, report, stories, totalEarnings}
 }
 
 console.log(runEarningsAnalysis([
