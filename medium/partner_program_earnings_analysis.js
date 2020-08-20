@@ -93,7 +93,7 @@ groups.forEach((group) => {
     'color:#333; font-size:14px; font-weight: 700'
   )
 
-  return {groups, report}
+  return {groups, report, stories}
 }
 
 console.log(runEarningsAnalysis([
