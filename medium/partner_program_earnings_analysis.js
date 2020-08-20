@@ -74,7 +74,7 @@ groups.forEach((group) => {
     const range = group.getPriceRange()
     const rangeDisplay = range.min !== range.max ? `between $${range.min} and $${range.max}` : `$${range.min}`
     const storiesDisplay = group.stories.map(({title, price}) => {
-      return `${title ? title: '*DELETED'} — ${price}`
+      return `${title ? title: '*DELETED'} — $${price}`
     }).join('\n\n  ')
     group.report = `${group.numPrices} of my stories earned ${rangeDisplay}.  The stories were ${storiesDisplay}`
   })
@@ -109,7 +109,16 @@ groups.forEach((group) => {
     'color:#333; font-size:14px; font-weight: 700'
   )
 
-  return {groups, report, stories, totalEarnings}
+  return {
+    groups, 
+    report, 
+    stories, 
+    totalReportData,
+    totalEarnings, 
+    printData() {
+      console.log(JSON.stringify(this))
+    }
+  }
 }
 
 console.log(runEarningsAnalysis([
@@ -119,4 +128,4 @@ console.log(runEarningsAnalysis([
     ({price}, {isNumberBetween}) => isNumberBetween(price, [1.01, 5.00]),
     ({price}, {isNumberBetween}) => isNumberBetween(price, [5.01, 10.00]),
     ({price}, {isNumberAtleast}) => isNumberAtleast(price, 10.01),
-  ]))
+  ]).printData())
