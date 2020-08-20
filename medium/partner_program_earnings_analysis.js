@@ -100,7 +100,7 @@ console.log(runEarningsAnalysis([
     ({price}, {isNumberBetween}) => isNumberBetween(price, [0.01]),
     ({price}, {isNumberBetween}) => isNumberBetween(price, [0.02, 0.50]),
     ({price}, {isNumberBetween}) => isNumberBetween(price, [0.51, 1.00]),
-    ({price}, {isNumberBetween}) => isNumberBetween(price, [1.01, 500]),
+    ({price}, {isNumberBetween}) => isNumberBetween(price, [1.01, 5.00]),
     ({price}, {isNumberBetween}) => isNumberBetween(price, [5.01, 10.00]),
     ({price}, {isNumberAtleast}) => isNumberAtleast(price, 10.01),
   ]))
