@@ -1,11 +1,25 @@
-function runEarningsAnalysis() {
-  const predicates = [
-    (price) => 0.01,
-    (price) => [0.02, 0.50],
-    (price) => [0.51, 1.00],
-    (price) => [1.01, 500],
-    (price) => [5.01, 10.00],
-  ]
+function runEarningsAnalysis(predicates) {
+  const utils = {
+    isNumberBetween(price, range) {
+      if (range[1] === undefined) {
+        range[1] = range[0]
+      }
+
+      return price >= range[0] && price <= range[1]
+    },
+    isNumberGreaterThan(price, min) {
+      return price > max
+    },
+    isNumberAtleast(price, min) {
+      return price >= min
+    },
+    isNumberLessThan(price, max) {
+      return price < max
+    },
+    isNumberEqual(price, target) {
+      return price === target
+    }
+  }
   
   // Shape the groups
   const groups = predicates.reduce((arr, predicate) => {
@@ -13,19 +27,19 @@ function runEarningsAnalysis() {
       predicate,
       prices: [],
       numPrices: 0,
-      maybeAddPrice(price) {
-        if (!predicate(price)) {
+      maybeAddStory(story) {
+        if (!predicate(story, utils)) {
           return
         }
-        this._addPrice(price)
+        this._addStory(story.price)
       },
       getPriceRange() {
         const sorted = group.prices.sort()
         return {min: sorted[0], max: sorted[sorted.length - 1]}
       },
-      _addPrice(price) {
+      _addStory(price) {
         this.prices.push(price)
-        this.numPrices = group.prices.length
+        this.numPrices = this.prices.length
       },
     }
     
@@ -39,13 +53,8 @@ function runEarningsAnalysis() {
   
   const periodDisplay = document.querySelector('.js-selectPeriod').innerText
   
-  const addPriceToGroup = (group, price) => {    
-    group.prices.push(price)
-    group.numPrices++
-  }
-  
-  stories.forEach(({price}) => {
-      groups.forEach((group) => group.maybeAddPrice(price))
+  stories.forEach((story) => {
+      groups.forEach((group) => group.maybeAddStory(story))
   })
   
 groups.forEach((group) => {
@@ -60,19 +69,17 @@ groups.forEach((group) => {
   
   const totalReportData = groups.reduce((data, group) => {
     const {min, max} = group.getPriceRange()
-    if (min === undefined) {
-      return
+    if (min !== undefined) {
+      if (!data.minPrice || min < data.minPrice) {
+        data.minPrice = min
+      }
+
+      if (!data.maxPrice || max > data.maxPrice) {
+        data.maxPrice = max
+      }
+
+      data.numPrices += group.numPrices
     }
-    
-    if (!data.minPrice || min < data.minPrice) {
-      data.minPrice = min
-    }
-    
-    if (!data.maxPrice || max > data.maxPrice) {
-      data.maxPrice = max
-    }
-    
-    data.numPrices += group.numPrices
     
     return data
   }, {numPrices: 0, minPrice: 0, maxPrice: 0})
@@ -89,4 +96,11 @@ groups.forEach((group) => {
   return {groups, report}
 }
 
-console.log(runEarningsAnalysis())
+console.log(runEarningsAnalysis([
+    ({price}, {isNumberBetween}) => isNumberBetween(price, [0.01]),
+    ({price}, {isNumberBetween}) => isNumberBetween(price, [0.02, 0.50]),
+    ({price}, {isNumberBetween}) => isNumberBetween(price, [0.51, 1.00]),
+    ({price}, {isNumberBetween}) => isNumberBetween(price, [1.01, 500]),
+    ({price}, {isNumberBetween}) => isNumberBetween(price, [5.01, 10.00]),
+    ({price}, {isNumberAtleast}) => isNumberAtleast(price, 10.01),
+  ]))
