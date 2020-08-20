@@ -115,6 +115,7 @@ groups.forEach((group) => {
     stories, 
     totalReportData,
     totalEarnings, 
+    periodDisplay,
     printData() {
       console.log(JSON.stringify(this))
     }
