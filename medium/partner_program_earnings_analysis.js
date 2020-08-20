@@ -25,20 +25,22 @@ function runEarningsAnalysis(predicates) {
   const groups = predicates.reduce((arr, predicate) => {
     const group = {
       predicate,
+      stories: [],
       prices: [],
       numPrices: 0,
       maybeAddStory(story) {
         if (!predicate(story, utils)) {
           return
         }
-        this._addStory(story.price)
+        this._addStory(story)
       },
       getPriceRange() {
         const sorted = group.prices.sort()
         return {min: sorted[0], max: sorted[sorted.length - 1]}
       },
-      _addStory(price) {
-        this.prices.push(price)
+      _addStory(story) {
+        this.stories.push(story)
+        this.prices.push(story.price)
         this.numPrices = this.prices.length
       },
     }
@@ -48,7 +50,14 @@ function runEarningsAnalysis(predicates) {
   }, [])
   
   const stories = Array.from(document.querySelectorAll('.js-postAmount')).map((node) => {
-      return {price: parseFloat(node.innerText.replace('$', ''))}
+      const titleLink = node.parentElement.parentElement.querySelectorAll('a[data-action="open-post"]')[0]
+      
+      return {
+        titleLink,
+        title: titleLink && titleLink.text,
+        url: titleLink && titleLink.href,
+        price: parseFloat(node.innerText.replace('$', ''))
+      }
   })
   
   const periodDisplay = document.querySelector('.js-selectPeriod').innerText
@@ -64,7 +73,10 @@ groups.forEach((group) => {
     
     const range = group.getPriceRange()
     const rangeDisplay = range.min !== range.max ? `between $${range.min} and $${range.max}` : `$${range.min}`
-    group.report = `${group.numPrices} of my stories earned ${rangeDisplay}.`
+    const storiesDisplay = group.stories.map(({title, price}) => {
+      return `${title ? title: '*DELETED'} — ${price}`
+    }).join('\n\n  ')
+    group.report = `${group.numPrices} of my stories earned ${rangeDisplay}.  The stories were ${storiesDisplay}`
   })
   
   const totalReportData = groups.reduce((data, group) => {
